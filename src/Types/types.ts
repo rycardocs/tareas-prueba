@@ -5,9 +5,9 @@ export type ResGenerico = {
   respuesta: DatosTareas[];
 };
 
-export interface ResGeneric<T>{
-  return: boolean
-  errror: string
+export interface ResGeneric<T> {
+  return: boolean;
+  errror: string;
   respuesta: T[];
 }
 
@@ -24,6 +24,8 @@ export type DatosTareas = {
   prioridad: string;
   usuario?: number;
   vencimiento?: string;
+  idTarea?: number;
+  fecha?: string;
 };
 
 export type LoginProps = {

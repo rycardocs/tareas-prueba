@@ -4,12 +4,12 @@ import UseFetch from "../api/useFetch";
 import { useLoginStore } from "../Store/LoginStore";
 
 type Props = {
-  enviarEstado: (estado: DatosTareas[])=> void
+  enviarEstado: ()=> void
 }
 
 const FormularioTarea = ({enviarEstado}: Props) => {
   const {UUID} = useLoginStore()
-  const initialValues = {
+  const initialValues = { 
     titulo: "",
     descripcion: '',
     fecha: "",
@@ -19,17 +19,19 @@ const FormularioTarea = ({enviarEstado}: Props) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({ defaultValues: initialValues });
   const handleTarea = async (formdata: DatosTareas) => {
-    console.log({req: 'subirTarea',...formdata, uuid: UUID})
     try {
-      const res = await UseFetch<ResGeneric<DatosTareas>>({req: 'traerTareas',...formdata,uuid: UUID}, "http://127.0.0.1:5000/tareas")
+      const res = await UseFetch<ResGeneric<DatosTareas>>({req: 'subirTarea',...formdata,uuid: UUID}, "http://127.0.0.1:5000/tareas")
       console.log(res)
       if(res.return){
-        enviarEstado(res.respuesta)
+        enviarEstado()
       }
     } catch (error){
       console.log(error)
+    } finally {
+      reset(initialValues)
     }
   };
   return (

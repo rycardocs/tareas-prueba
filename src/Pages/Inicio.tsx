@@ -37,8 +37,8 @@ const Inicio = () => {
     <>
       <NavBar />
       <main className="container mx-auto space-y-5 xl:flex gap-2">
-        <FormularioTarea enviarEstado={actualizar} />
-        <TablaTareas tareas={tareas} />
+        <FormularioTarea enviarEstado={traerTareas} />
+        <TablaTareas tareas={tareas} actualizar={actualizar} traer={traerTareas}/>
       </main>
     </>
   );
